@@ -3,18 +3,20 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E3234)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-<!-- default file list -->
-*Files to look at*:
+
+# WinForms Data Grid - Update the row style immediately after changing a value in the cell editor
+
+The example handles the [EditValueChanged](https://docs.devexpress.com/WindowsForms/DevExpress.XtraEditors.Repository.RepositoryItem.EditValueChanged) event to respond to changing an editor's value. The example calls the [PostEditor](https://docs.devexpress.com/WindowsForms/DevExpress.XtraGrid.Views.Base.BaseView.PostEditor) method to save the modified value to a data source. Once the value is posted to a data source, the Data Grid control invalidates/repaints the cell. The [RowCellStyle](https://docs.devexpress.com/WindowsForms/DevExpress.XtraGrid.Views.Grid.GridView.RowCellStyle) event is handled to customize row appearance settings based on a specific condition:
+
+```csharp
+void gridView1_RowCellStyle(object sender, RowCellStyleEventArgs e) {
+    if (!true.Equals(gridView1.GetRowCellValue(e.RowHandle, "UseStyles")))
+        return;
+    e.Appearance.BackColor = GetRowBackColor(e.RowHandle);
+}
+```
+
+
+## Files to Review
 
 * [Form1.cs](./CS/Form1.cs) (VB: [Form1.vb](./VB/Form1.vb))
-* [Program.cs](./CS/Program.cs) (VB: [Program.vb](./VB/Program.vb))
-<!-- default file list end -->
-# How to update a row's style immediately after a an inplace editor's value is changed
-
-
-<p>To catch the moment when an end-user changes some value in its cell, please handle the <a href="http://documentation.devexpress.com/#WindowsForms/DevExpressXtraEditorsRepositoryRepositoryItem_EditValueChangedtopic">EditValueChanged </a> event of a corresponding RepositoryItem. To immediately post this value, you need to call the <a href="http://documentation.devexpress.com/#WindowsForms/DevExpressXtraGridViewsBaseBaseView_PostEditortopic">PostEditor </a> method of a corresponding container. </p><br />
-<p>This example demonstrates this approach in action. Check/uncheck checkboxes and move sliders to see how rows colors will be changed.</p>
-
-<br/>
-
-
